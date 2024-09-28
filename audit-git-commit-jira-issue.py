@@ -83,10 +83,10 @@ def missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commi
 
 def audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits):
     print('Issues in jira but not in git commits:')
-    for issue in issues_in_jira.difference(issues_in_git_commits):
+    for issue in sorted(issues_in_jira.difference(issues_in_git_commits)):
         print('\t' + issue)
     print('Issues in git commits but not in jira:')
-    for issue in issues_in_git_commits.difference(issues_in_jira):
+    for issue in sorted(issues_in_git_commits.difference(issues_in_jira)):
         print('\t' + issue)
 
 if __name__ == '__main__':
