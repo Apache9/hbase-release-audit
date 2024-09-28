@@ -58,12 +58,44 @@ class JiraReader:
     def __init__(self, jira_url):
         self._jira = jira.JIRA(jira_url)
 
+    @staticmethod
+    def construct_jql(fix_versions):
+        fix_versions_condition = ','.join(fix_versions)
+        return f'project = HBase AND resolution = Fixed AND fixVersion IN ({fix_versions_condition})'
+
+    def fetch_issues(self, fix_versions):
+        start_at = 0
+        max_results = 50
+        jql = JiraReader.construct_jql(fix_versions)
+        issues = []
+        while True:
+            issue_list = self._jira.search_issues(jql, start_at, max_results)
+            issues.extend(issue.key for issue in issue_list)
+            start_at += len(issue_list)
+            if start_at >= issue_list.total:
+                break
+        return issues
+
+def missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commits_previous_release):
+    print('Commit to previous release but not in current release:')
+    for issue in sorted(issues_in_git_commits_previous_release.difference(issues_in_git_commits)):
+        print('\t' + issue)
+
+def audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits):
+    print('Issues in jira but not in git commits:')
+    for issue in issues_in_jira.difference(issues_in_git_commits):
+        print('\t' + issue)
+    print('Issues in git commits but not in jira:')
+    for issue in issues_in_git_commits.difference(issues_in_jira):
+        print('\t' + issue)
+
 if __name__ == '__main__':
     repo = RepoReader('/home/zhangduo/hbase/hbase')
     merge_base = repo.merge_base('origin/branch-3', 'origin/branch-2.0')
-    release_branch_issues = set(repo.get_jira_issues_from_commits(merge_base, 'origin/branch-3'))
-    previous_release_branch_issues = repo.get_jira_issues_from_commits(merge_base, 'rel/2.0.0')
-    previous_release_branch_issues.sort()
-    for issue in previous_release_branch_issues:
-        if issue not in release_branch_issues:
-            print(issue)
+    issues_in_git_commits = set(repo.get_jira_issues_from_commits(merge_base, 'origin/branch-3'))
+    issues_in_git_commits_previous_release = set(repo.get_jira_issues_from_commits(merge_base, 'rel/2.0.0'))
+    missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commits_previous_release)
+
+    jira = JiraReader('https://issues.apache.org/jira')
+    issues_in_jira = set(jira.fetch_issues(['3.0.0-alpha-1, 3.0.0-alpha-2, 3.0.0-alpha-3, 3.0.0-alpha-4, 3.0.0-beta-1', '3.0.0-beta-2']))
+    audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits.difference(issues_in_git_commits_previous_release))
