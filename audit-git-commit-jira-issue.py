@@ -1,3 +1,4 @@
+import argparse
 import pathlib
 import re
 import git
@@ -88,6 +89,31 @@ def audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits):
     print('Issues in git commits but not in jira:')
     for issue in sorted(issues_in_git_commits.difference(issues_in_jira)):
         print('\t' + issue)
+
+def build_arg_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--release-versions',
+        help='Comma separated list of release versions',
+        required=True)
+    parser.add_argument(
+        '--previous-release-version',
+        help='Previous release version',
+        required=True)
+    parser.add_argument(
+        '--release-branch',
+        help='Git branch for current release',
+        required=True)
+    parser.add_argument(
+        '--previous-release-branch',
+        help='Git branch for the previous release',
+        required=True)
+    parser.add_argument(
+        '--repo',
+        help='Local git repository directory',
+        required=True)
+
+    return parser
 
 if __name__ == '__main__':
     repo = RepoReader('/home/zhangduo/hbase/hbase')
