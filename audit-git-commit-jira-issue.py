@@ -18,7 +18,7 @@ class RepoReader:
     ]
     _identify_leading_jira_id_patterns = [
         re.compile(r'^[\s\[]*(hbase-\d+)', re.IGNORECASE),
-        re.compile(r'^[\s\[]*(hbse-\d+)', re.IGNORECASE), # typo
+        re.compile(r'^[\s\[]*(hbse-\d+)', re.IGNORECASE),  # typo
     ]
 
     def __init__(self, repo):
@@ -55,6 +55,7 @@ class RepoReader:
                 issues.append(issue)
         return issues
 
+
 class JiraReader:
     def __init__(self, jira_url):
         self._jira = jira.JIRA(jira_url)
@@ -77,18 +78,34 @@ class JiraReader:
                 break
         return issues
 
-def missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commits_previous_release):
+
+def missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commits_previous_release,
+                                      ignore_missing_in_current_release):
     print('Commit to previous release but not in current release:')
-    for issue in sorted(issues_in_git_commits_previous_release.difference(issues_in_git_commits)):
+    for issue in sorted(filter(lambda i: i not in ignore_missing_in_current_release,
+                               issues_in_git_commits_previous_release.difference(issues_in_git_commits))):
         print('\t' + issue)
 
-def audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits):
+
+def audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits, ignore_missing_in_git,
+                                      ignore_missing_in_jira):
     print('Issues in jira but not in git commits:')
-    for issue in sorted(issues_in_jira.difference(issues_in_git_commits)):
+    for issue in sorted(filter(lambda i: i not in ignore_missing_in_git,
+                               issues_in_jira.difference(issues_in_git_commits))):
         print('\t' + issue)
     print('Issues in git commits but not in jira:')
-    for issue in sorted(issues_in_git_commits.difference(issues_in_jira)):
+    for issue in sorted(filter(lambda i: i not in ignore_missing_in_jira,
+                               issues_in_git_commits.difference(issues_in_jira))):
         print('\t' + issue)
+
+
+def read_jira_issues_from_file(file):
+    if file:
+        with open(file) as f:
+            return set(l.split()[0] for l in f.readlines())
+    else:
+        return set()
+
 
 def build_arg_parser():
     parser = argparse.ArgumentParser()
@@ -112,16 +129,40 @@ def build_arg_parser():
         '--repo',
         help='Local git repository directory',
         required=True)
-
+    parser.add_argument(
+        '--ignore-missing-in-current-release',
+        help='A file contains the jira issues which should be ignored when checking jira issue in previous release but not in current release',
+        required=False
+    )
+    parser.add_argument(
+        '--ignore-missing-in-git',
+        help='A file contains the jira issues which should be ignored when checking jira issues in jira ifx versions but not in git commits',
+        required=False
+    )
+    parser.add_argument(
+        '--ignore-missing-in-jira',
+        help='A file contains the jira issues which should be ignored when checking jira issues in git commits but not in jira fix versions',
+        required=False
+    )
     return parser
 
+
 if __name__ == '__main__':
-    repo = RepoReader('/home/zhangduo/hbase/hbase')
-    merge_base = repo.merge_base('origin/branch-3', 'origin/branch-2.0')
-    issues_in_git_commits = set(repo.get_jira_issues_from_commits(merge_base, 'origin/branch-3'))
-    issues_in_git_commits_previous_release = set(repo.get_jira_issues_from_commits(merge_base, 'rel/2.0.0'))
-    missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commits_previous_release)
+    parser = build_arg_parser()
+    args = parser.parse_args()
+    repo = RepoReader(args.repo)
+    merge_base = repo.merge_base(args.release_branch, args.previous_release_branch)
+    issues_in_git_commits = set(repo.get_jira_issues_from_commits(merge_base, args.release_branch))
+    issues_in_git_commits_previous_release = set(
+        repo.get_jira_issues_from_commits(merge_base, 'rel/' + args.previous_release_version))
+    ignore_missing_in_current_release = read_jira_issues_from_file(args.ignore_missing_in_current_release)
+    missed_issues_in_previous_release(issues_in_git_commits, issues_in_git_commits_previous_release,
+                                      ignore_missing_in_current_release)
 
     jira = JiraReader('https://issues.apache.org/jira')
-    issues_in_jira = set(jira.fetch_issues(['3.0.0-alpha-1, 3.0.0-alpha-2, 3.0.0-alpha-3, 3.0.0-alpha-4, 3.0.0-beta-1', '3.0.0-beta-2']))
-    audit_jira_issues_and_git_commits(issues_in_jira, issues_in_git_commits.difference(issues_in_git_commits_previous_release))
+    issues_in_jira = set(jira.fetch_issues(args.release_versions))
+    ignore_missing_in_git = read_jira_issues_from_file(args.ignore_missing_in_git)
+    ignore_missing_in_jira = set(ignore_missing_in_current_release)
+    audit_jira_issues_and_git_commits(issues_in_jira,
+                                      issues_in_git_commits.difference(issues_in_git_commits_previous_release),
+                                      ignore_missing_in_git, ignore_missing_in_jira)
