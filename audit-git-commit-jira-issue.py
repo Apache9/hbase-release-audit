@@ -19,6 +19,8 @@ class RepoReader:
     _identify_leading_jira_id_patterns = [
         re.compile(r'^[\s\[]*(hbase-\d+)', re.IGNORECASE),
         re.compile(r'^[\s\[]*(hbse-\d+)', re.IGNORECASE),  # typo
+        re.compile(r'^[\s\[]*(hbae-\d+)', re.IGNORECASE),  # typo
+        re.compile(r'^[\s\[]*(hbase \d+)', re.IGNORECASE), # typo
     ]
 
     def __init__(self, repo):
@@ -41,7 +43,7 @@ class RepoReader:
         for pattern in RepoReader._identify_leading_jira_id_patterns:
             match = pattern.match(commit.summary)
             if match:
-                return match.groups()[0].upper().replace('HBSE', 'HBASE')
+                return re.sub(r'HBSE-|HBAE-|HBASE ', 'HBASE-', match.groups()[0].upper())
         return None
 
     def get_jira_issues_from_commits(self, start_commit, end_commit):

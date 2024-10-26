@@ -1,0 +1,33 @@
+HBASE-12350 Backport
+HBASE-17553 Make a 2.0.0 Release
+HBASE-18187 Release hbase-2.0.0-alpha-1
+HBASE-18190 Set version
+HBASE-18282 Forward port in HBASE-20054
+HBASE-18431 Addressing compatibility issue between 1.x and 2.x, not needed in 3.x
+HBASE-18514 Backport
+HBASE-18594 Release hbase-2.0.0-alpha2
+HBASE-18595 Set version
+HBASE-18615 Test failure on branch-2
+HBASE-18653 2.x only change
+HBASE-18817 2.x only change
+HBASE-18819 Set version
+HBASE-18828 Generate CHANGES.txt for 2.x
+HBASE-18833 Backport personality script from master to all other branches
+HBASE-18933 Set version
+HBASE-18945 Typo in commit message(HBSE-18945), there is an addendum in branch-2 but not in master so we get this on branch-2
+HBASE-19197 Move version on branch-2 from 2.0.0-alpha4 to 2.0.0-beta-1.SNAPSHOT
+HBASE-19315 Set version
+HBASE-19407 2.x only change
+HBASE-19648 Set version
+HBASE-19670 2.x only change
+HBASE-19716 Fix test on branch-2
+HBASE-19860 2.x only Jenkins file change for debugging
+HBASE-19888 Set version
+HBASE-20113 Set version
+HBASE-20142 Copy doc from master to branch-2
+HBASE-20233 Missed in master, but should have been fixed throw HBASE-27713
+HBASE-20246 2.0 only change
+HBASE-20247 Set version
+HBASE-20415 2.0 only change
+HBASE-20462 Put up 2.0.0RC1
+HBASE-20464 2.0 only change
