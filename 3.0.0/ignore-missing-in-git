@@ -1,0 +1,77 @@
+HBASE-13126 Umbrella for release notes
+HBASE-13992 In 2.0.0 but reverted(hbase-spark)
+HBASE-14123 In 2.0.0 but reverted(backup&restore)
+HBASE-14150 In 2.0.0 but reverted(hbase-spark)
+HBASE-14158 In 2.0.0 but reverted(hbase-spark)
+HBASE-14159 In 2.0.0 but reverted(hbase-spark)
+HBASE-14181 In 2.0.0 but reverted(hbase-spark)
+HBASE-14184 In 2.0.0 but reverted(hbase-spark)
+HBASE-14340 In 2.0.0 but reverted(hbase-spark)
+HBASE-14375 In 2.0.0 but reverted(hbase-spark)
+HBASE-14377 In 2.0.0 but reverted(hbase-spark)
+HBASE-14406 In 2.0.0 but reverted(hbase-spark)
+HBASE-14515 In 2.0.0 but reverted(hbase-spark)
+HBASE-14789 In 2.0.0 but reverted(hbase-spark)
+HBASE-14849 In 2.0.0 but reverted(hbase-spark)
+HBASE-15161 Umbrella for release notes
+HBASE-15184 In 2.0.0 but reverted(hbase-spark)
+HBASE-15282 In 2.0.0 but reverted(hbase-spark)
+HBASE-15310 In 2.0.0 but reverted(hbase-spark)
+HBASE-15333 In 2.0.0 but reverted(hbase-spark)
+HBASE-15336 In 2.0.0 but reverted(hbase-spark)
+HBASE-15434 In 2.0.0 but reverted(hbase-spark)
+HBASE-15473 In 2.0.0 but reverted(hbase-spark)
+HBASE-15572 In 2.0.0 but reverted(hbase-spark)
+HBASE-15597 In 2.0.0 but reverted(hbase-spark)
+HBASE-15809 Umbrella issue for release note
+HBASE-16638 In 2.0.0 but reverted(hbase-spark)
+HBASE-16804 In 2.0.0 but reverted(hbase-spark)
+HBASE-16823 In 2.0.0 but reverted(hbase-spark)
+HBASE-17546 In 2.0.0 but reverted(hbase-spark)
+HBASE-17547 In 2.0.0 but reverted(hbase-spark)
+HBASE-17549 In 2.0.0 but reverted(hbase-spark)
+HBASE-17574 In 2.0.0 but reverted(hbase-spark)
+HBASE-17909 In 2.0.0 but reverted(hbase-spark)
+HBASE-17918 In 2.0.0 but reverted(serial replication)
+HBASE-17933 In 2.0.0 but reverted(hbase-spark)
+HBASE-18070 Umbrella issue for release note
+HBASE-18095 Umbrella issue without release note but the title provide something, so leave it as is
+HBASE-18175 In 2.0.0 but reverted(hbase-spark)
+HBASE-18176 In 2.0.0 but reverted(hbase-spark)
+HBASE-18646 In 2.0.0 but reverted(backup&restore)
+HBASE-18659 Umbrella issue without release note but the title provide something, so leave it as is
+HBASE-19064 Umbrella issue without release note but the title provide something, so leave it as is
+HBASE-19397 Umbrella issue for release note
+HBASE-20006 HBASE-20011 is committed to branch-2 with HBASE-20006 in commit message, so the tool think HBASE-20006 is already in 2.0.0 but actually it is not
+HBASE-20046 Umbrella issue for release note
+HBASE-20152 Umbrella issue without release note but the title provide something, so leave it as is
+HBASE-20540 Umbrella issue without release note but the title provide something, so leave it as is
+HBASE-20610 Umbrella issue for release note
+HBASE-20751 A sub task without code commit but the title provide something, so leave it as is
+HBASE-21360 Umbrella issue without release note but the title provide something, so leave it as is
+HBASE-21430 No code change to main repo but there is a release note, so leave it as is
+HBASE-21512 Umbrella issue for release note
+HBASE-21745 Umbrella issue for release note
+HBASE-21879 Umbrella issue for release note
+HBASE-22120 Umbrella issue for release note
+HBASE-22514 Umbrella issue for release note
+HBASE-22953 No actual code commit but the title is useful, leave it as is
+HBASE-23797 Umbrella issue for release note
+HBASE-23841 Umbrella issue for release note
+HBASE-24169 Umbrella issue for release note
+HBASE-24217 Umbrella issue for release note
+HBASE-25099 Umbrella issue for release note
+HBASE-25450 Wrong format of commit message, but we do have jira issue number in it
+HBASE-25649 Umbrella issue for release note
+HBASE-25666 Umbrella issue with no release note, but the title tells something
+HBASE-25826 Umbrella issue for release note
+HBASE-25865 Umbrella issue with no release note, but the title tells something
+HBASE-25920 Umbrella issue for release note
+HBASE-26067 Umbrella issue for release note
+HBASE-26233 Umbrella issue for release note
+HBASE-26419 Umbrella issue without release note, but the title tells something
+HBASE-27108 Just a revert of HBASE-25709
+HBASE-27109 Umbrella issue for release note
+HBASE-27110 Umbrella issue for release note
+HBASE-28196 Umbrella issue for release note
+HBASE-28674 Umbrella issue for release note

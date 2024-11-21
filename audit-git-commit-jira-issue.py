@@ -71,6 +71,7 @@ class JiraReader:
         start_at = 0
         max_results = 50
         jql = JiraReader.construct_jql(fix_versions)
+        print('executing jql: ' + jql)
         issues = []
         while True:
             issue_list = self._jira.search_issues(jql, start_at, max_results)
@@ -162,7 +163,7 @@ if __name__ == '__main__':
                                       ignore_missing_in_current_release)
 
     jira = JiraReader('https://issues.apache.org/jira')
-    issues_in_jira = set(jira.fetch_issues(args.release_versions))
+    issues_in_jira = set(jira.fetch_issues(args.release_versions.split(',')))
     ignore_missing_in_git = read_jira_issues_from_file(args.ignore_missing_in_git)
     ignore_missing_in_jira = set(ignore_missing_in_current_release)
     audit_jira_issues_and_git_commits(issues_in_jira,
