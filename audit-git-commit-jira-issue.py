@@ -165,7 +165,7 @@ if __name__ == '__main__':
     jira = JiraReader('https://issues.apache.org/jira')
     issues_in_jira = set(jira.fetch_issues(args.release_versions.split(',')))
     ignore_missing_in_git = read_jira_issues_from_file(args.ignore_missing_in_git)
-    ignore_missing_in_jira = set(ignore_missing_in_current_release)
+    ignore_missing_in_jira = read_jira_issues_from_file(args.ignore_missing_in_jira)
     audit_jira_issues_and_git_commits(issues_in_jira,
                                       issues_in_git_commits.difference(issues_in_git_commits_previous_release),
                                       ignore_missing_in_git, ignore_missing_in_jira)

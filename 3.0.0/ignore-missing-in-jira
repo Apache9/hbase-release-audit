@@ -1,0 +1,34 @@
+HBASE-14070 Committed and reverted
+HBASE-17094 Committed and reverted
+HBASE-18376 Just add some debug logs, but since it is not reverted, added fix version 3.0.0-alpha-1
+HBASE-19665 Committed and reverted
+HBASE-19791 Committed and reverted
+HBASE-20214 Committed and reverted
+HBASE-20291 Committed and reverted
+HBASE-20639 Committed and reverted
+HBASE-20937 Committed and reverted
+HBASE-20949 Committed and reverted
+HBASE-21188 Committed and reverted
+HBASE-21596 Committed and reverted
+HBASE-21668 Committed and reverted
+HBASE-22699 Committed and reverted
+HBASE-22823 Committed and reverted
+HBASE-2284 Wrong jira id in commit message, reverted
+HBASE-22857 Committed and reverted
+HBASE-22917 Committed and reverted
+HBASE-23194 Committed and reverted
+HBASE-23381 Wrong jira id in commit message, reverted
+HBASE-24051 Committed and reverted
+HBASE-24086 Committed and reverted
+HBASE-24106 Committed and reverted
+HBASE-24403 Committed and reverted
+HBASE-25017 Committed and reverted
+HBASE-25134 Committed and reverted
+HBASE-25280 Committed and reverted
+HBASE-25293 Committed and reverted
+HBASE-25663 Committed and reverted
+HBASE-26813 Committed and reverted
+HBASE-26856 Committed and reverted
+HBASE-26962 Committed and reverted
+HBASE-27084 Committed and reverted
+HBASE-27157 Committed and reverted
