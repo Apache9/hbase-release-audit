@@ -1,6 +1,5 @@
 HBASE-14070 Committed and reverted
 HBASE-17094 Committed and reverted
-HBASE-18376 Just add some debug logs, but since it is not reverted, added fix version 3.0.0-alpha-1
 HBASE-19665 Committed and reverted
 HBASE-19791 Committed and reverted
 HBASE-20214 Committed and reverted
@@ -32,3 +31,4 @@ HBASE-26856 Committed and reverted
 HBASE-26962 Committed and reverted
 HBASE-27084 Committed and reverted
 HBASE-27157 Committed and reverted
+HBASE-28962 Committed and reverted
